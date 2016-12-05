@@ -17,10 +17,10 @@ import java.io.IOException;
 class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
-    private MainActivity mainActivity;
+    private JokeCallBack callBack;
 
-    public EndpointsAsyncTask(MainActivity mainActivity ){
-        this.mainActivity = mainActivity;
+    public EndpointsAsyncTask(JokeCallBack callBack ){
+        this.callBack = callBack;
     }
 
     @Override
@@ -46,6 +46,10 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     @Override
     protected void onPostExecute(String result) {
         //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-        mainActivity.tellJoke(result);
+        callBack.processJoke(result);
+    }
+
+    public interface JokeCallBack {
+        public void processJoke(String joke);
     }
 }

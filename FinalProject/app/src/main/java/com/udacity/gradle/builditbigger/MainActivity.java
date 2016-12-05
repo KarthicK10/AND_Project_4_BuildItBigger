@@ -13,7 +13,7 @@ import com.example.karthick.androidjokeslibrary.JokeActivity;
 import com.library.jokes.Joker;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements EndpointsAsyncTask.JokeCallBack {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +48,11 @@ public class MainActivity extends ActionBarActivity {
         new EndpointsAsyncTask(this).execute(new Pair<Context, String>(this, "firstJoke"));
     }
 
-    public void tellJoke(String joke) {
+    @Override
+    public void processJoke(String joke) {
         Joker joker = new Joker();
         Intent intent = new Intent(this, JokeActivity.class);
         intent.putExtra(JokeActivity.JOKE_KEY, joke);
         startActivity(intent);
     }
-
-
 }
