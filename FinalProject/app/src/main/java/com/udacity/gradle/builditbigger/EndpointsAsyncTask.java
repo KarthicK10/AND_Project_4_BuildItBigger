@@ -1,8 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Pair;
 
 import com.example.karthick.builditbigger.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -14,9 +12,8 @@ import java.io.IOException;
  * Created by KarthicK on 12/4/2016.
  */
 
-class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
     private static MyApi myApiService = null;
-    private Context context;
     private JokeCallBack callBack;
 
     public EndpointsAsyncTask(JokeCallBack callBack ){
@@ -24,7 +21,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     }
 
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected String doInBackground(Void... voids) {
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://builditbiggergce.appspot.com/_ah/api/");
@@ -32,9 +29,6 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
 
             myApiService = builder.build();
         }
-
-        context = params[0].first;
-        String name = params[0].second;
 
         try {
             return myApiService.getJoke().execute().getData();
