@@ -18,6 +18,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+<<<<<<< HEAD
 
     productFlavors{
         free{
@@ -27,6 +28,18 @@ android {
             applicationId "com.udacity.gradle.builditbigger.paid"
         }
     }
+||||||| merged common ancestors
+=======
+    productFlavors {
+        free {
+            applicationId "com.udacity.gradle.builditbigger.free"
+        }
+        paid {
+            applicationId "com.udacity.gradle.builditbigger.paid"
+        }
+    }
+    sourceSets { paid { java.srcDirs = ['src/paid/java', 'src/paid/java/'] } }
+>>>>>>> 19121a80e40da87b0ffa92d4638d33bb5ae853b0
 }
 
 dependencies {
@@ -36,8 +49,17 @@ dependencies {
     })
     compile project(':javajokeslibrary')
     compile project(':androidjokeslibrary')
+<<<<<<< HEAD
     compile 'com.android.support:appcompat-v7:24.0.1'
     freeCompile 'com.google.android.gms:play-services-ads:10.0.1'
-    compile 'com.google.code.findbugs:jsr305:2.0.1'
+||||||| merged common ancestors
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.google.android.gms:play-services-ads:10.0.1'
+=======
     compile project(path: ':backend', configuration: 'android-endpoints')
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.google.android.gms:play-services-ads:10.0.1'
+>>>>>>> 19121a80e40da87b0ffa92d4638d33bb5ae853b0
+    compile 'com.google.code.findbugs:jsr305:2.0.1'
+    compile 'com.android.support:support-v4:24.2.1'
 }
